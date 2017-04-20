@@ -118,6 +118,9 @@ function doRequest(request) {
   }
   // Cache busting addition to URL
   kmlUrl = url + "?dummy=" + (new Date()).getTime();
+  
+alert(kmlUrl);
+
   // This may keep adding new layers which we then hide which probably leaks memory like a sieve but this is only a hacky prototype...
   kmlLayer = new google.maps.KmlLayer({
     url: kmlUrl,
