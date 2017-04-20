@@ -84,26 +84,11 @@ function updateLocationEntriesSelect() {
 }
 
 // DD
-// Map init
-var map;
-var kmlLayer = null;
-function initMap() {
-  // Don't know why this is being called on pages without a map div but...
-  if (window.location.pathname.includes("map")) {
-    var greenwich = {lat: 51.4826, lng: 0.0077};
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 6,
-      center: greenwich
-    });
-  }
-}
-
-// DD
 // Request SQL-mediated data
 function doRequest(request) {
 
   // Okay, first we build the request
-  url = "/public/mock-data/";
+  url = "public/mock-data/";
   if (request == "get-boundary") {
     url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#boundary-entries-select").find(":selected").text();
   }
@@ -122,13 +107,49 @@ function doRequest(request) {
   // Cache busting addition to URL
   kmlUrl = url + ".kml?dummy=" + (new Date()).getTime();
   
-alert(kmlUrl);
+
+console.log(kmlUrl);
+
+  var jqxhr = $.get(kmlUrl)
+  .done(function(data) {
+    console.log(data);
+  });
+
+
+
 
   // This may keep adding new layers which we then hide which probably leaks memory like a sieve but this is only a hacky prototype...
   kmlLayer = new google.maps.KmlLayer({
-    url: kmlUrl,
+//    url: kmlUrl,
+//    url: 'http://localhost:3000/public/mock-data/local-authority_birmingham-metropolitan-district.kml?dummy=1492710501646361',
+      url: 'https://geo-registers-prototype.herokuapp.com/public/mock-data/local-authority_birmingham-metropolitan-district.kml?dummy=1492710501646361',
+//    url: 'https://enigmatic-dusk-83533.herokuapp.com/data/local-authority_birmingham-metropolitan-district.kml?dummy=1492711151082',
     map: map,
-    zIndex: 1
+    zIndex: 0
   });  
+  
+  
+            google.maps.event.addListener(kmlLayer, 'status_changed', function () {
+            console.log('KML load: ' + kmlLayer.getStatus());
+            if (kmlLayer.getStatus() != 'OK') {
+                $('#maps-error').text('[' + kmlLayer.getStatus() + '] Google Maps could not load the layer. Please try again later.');
+            }
+        });
 
+
+}
+
+// DD
+// Map init
+var map;
+var kmlLayer = null;
+function initMap() {
+  // Don't know why this is being called on pages without a map div but...
+  if (window.location.pathname.includes("map")) {
+    var greenwich = {lat: 51.4826, lng: 0.0077};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 6,
+      center: greenwich
+    });
+  }
 }
