@@ -53,6 +53,9 @@ function loadSelect(element, fromLocation) {
 
     // Cascade update the boundary entries if that select exists (checks for empty to stop recursive loop)
     if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
+
+console.log("here");
+
       boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
       url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + ".txt";
       loadSelect('boundary-entries', url);
