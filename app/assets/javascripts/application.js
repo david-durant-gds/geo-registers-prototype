@@ -20,4 +20,17 @@ $(document).ready(function () {
   // to toggle hidden content
   var showHideContent = new GOVUK.ShowHideContent()
   showHideContent.init()
+  
+  // DD - for map stuff
+  var map;
+  var kmlBoundaryLayer = null;
+  var kmlLocationsLayer = null;
+  // If it's a page with a map we need to set it up
+  if (window.location.pathname.includes("map") {
+    var greenwich = {lat: 51.4826, lng: 0.0077};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 6,
+      center: greenwich
+    });
+  }
 })
