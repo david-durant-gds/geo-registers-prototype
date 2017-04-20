@@ -98,6 +98,7 @@ function initMap() {
 // DD
 // Request SQL-mediated data
 function doRequest(request) {
+/*
   // Okay, first we build the request
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
   if (request == "get-boundary") {
@@ -126,5 +127,5 @@ alert(kmlUrl);
     map: map,
     zIndex: 1
   });  
-
+*/
 }
