@@ -52,14 +52,14 @@ function loadSelect(element, fromLocation) {
     });
 
     // Cascade update the boundary entries if that select exists (checks for empty to stop recursive loop)
-    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text())) {
+    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
       boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
       url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + ".txt";
       loadSelect('boundary-entries', url);
     }
     
     // Cascade update the location entries if that select exists (checks for empty to stop recursive loop)
-    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text())) {
+    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
       locationRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
       url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue + ".txt";
       loadSelect('location-entries', url);
