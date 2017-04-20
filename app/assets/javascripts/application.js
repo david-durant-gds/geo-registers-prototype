@@ -108,15 +108,9 @@ function doRequest(request) {
 
   // Next we update the SQL command box
   commandUrl = url + "_command";
-  
-alert(commandUrl);  
-  
   var jqxhr = $.get(commandUrl)
   .done(function(data) {
-
-alert(data);
-  
-    $("#command-box").text(data);
+    $("#command-box").val(data);
   });
 
   // Finally we get and then display the map data
