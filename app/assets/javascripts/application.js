@@ -57,14 +57,14 @@ function loadSelect(element, fromLocation) {
 // What to do when registers-with-boundaries-select is changed
 function updateBoundaryEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/mock-data/" + boundaryRegisterValue + "txt";
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + "txt";
   loadSelect('boundary-entries', url);
 }
 
 // What to do when registers-with-locations-select is changed
 function updateLocationEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/mock-data/" + boundaryRegisterValue + "txt";
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + "txt";
   loadSelect('boundary-entries', url);
 }
 
