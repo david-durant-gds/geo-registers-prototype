@@ -101,12 +101,14 @@ function initMap() {
 // Request SQL-mediated data
 function doRequest(request) {
 
+alert("Here!");
+
   // Okay, first we build the request
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
   if (request == "get-boundary") {
     url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#location-entries").find(":selected").text();
 
-console.log(url);
+alert(url);
 
 
   }
