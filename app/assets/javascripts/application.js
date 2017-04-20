@@ -40,10 +40,10 @@ function loadSelect(element, fromLocation) {
     var $el = $("#" + element);
     $el.empty();
     splitData = data.split("\n");
-      $.each(splitData, function(loopNumber, value) {
-          $el.append($("<option></option>").attr("value", value).text(value));
-        });
-    }
+    $.each(splitData, function(loopNumber, value) {
+      $el.append($("<option></option>").attr("value", value).text(value));
+    });
+  });
 }
 
 // DD
