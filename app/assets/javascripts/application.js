@@ -124,7 +124,7 @@ alert(kmlUrl);
   kmlLayer = new google.maps.KmlLayer({
     url: kmlUrl,
     map: map,
-    zIndex: 0
+    zIndex: 1
   });  
 
 }
