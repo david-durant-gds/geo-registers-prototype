@@ -28,9 +28,13 @@ var map;
 var kmlBoundaryLayer = null;
 var kmlLocationsLayer = null;
 function initMap() {
-  var greenwich = {lat: 51.4826, lng: 0.0077};
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 6,
-    center: greenwich
-  });
+
+  // Don't know why this is being called on pages without a map div but...
+  if (window.location.pathname.includes("map") {
+    var greenwich = {lat: 51.4826, lng: 0.0077};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 6,
+      center: greenwich
+    });
+  }
 }
