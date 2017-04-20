@@ -21,9 +21,38 @@ $(document).ready(function () {
   var showHideContent = new GOVUK.ShowHideContent()
   showHideContent.init()
   
+  
+  // DD
+  // "length" is used to check for existance
+  if ($("#registers-with-boundaries-select").length) {
+    loadSelect('registers-with-boundaries-select', 'registers-with-boundaries.txt');
+    if ($("#boundary-entries").length) {
+      ($("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
+    }
+  }
+  
 })
 
-// DD - for map stuff
+// DD
+function loadSelect(element, fromLocation) {
+  var jqxhr = $.get("https://geo-registers-prototype.herokuapp.com/mock-data/" + fromLocation, { element: element })
+  .done(function(data) {
+    var $el = $("#" + element);
+    $el.empty();
+    splitData = data.split("\n");
+      $.each(splitData, function(loopNumber, value) {
+          $el.append($("<option></option>").attr("value", value).text(value));
+        });
+    }
+}
+
+// DD
+// What to do when registers-with-boundaries-select is changed
+function updateBoundaryEntriesSelect() {
+}
+
+// DD
+// Map stuff
 var map;
 var kmlBoundaryLayer = null;
 var kmlLocationsLayer = null;
