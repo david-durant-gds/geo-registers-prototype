@@ -31,11 +31,18 @@ $(document).ready(function () {
     }
   }
   
+  if ($("#registers-with-locations-select").length) {
+    loadSelect('registers-with-locations-select', 'registers-with-locations');
+    if ($("#locations-entries").length) {
+      $("#registers-with-locations-select").change(updateLocationEntriesSelect);
+    }
+  }
+  
 })
 
 // DD
 function loadSelect(element, fromLocation) {
-  var jqxhr = $.get("https://geo-registers-prototype.herokuapp.com/mock-data/" + fromLocation, { element: element })
+  var jqxhr = $.get("https://geo-registers-prototype.herokuapp.com/public/mock-data/" + fromLocation, { element: element })
   .done(function(data) {
     var $el = $("#" + element);
     $el.empty();
@@ -49,6 +56,16 @@ function loadSelect(element, fromLocation) {
 // DD
 // What to do when registers-with-boundaries-select is changed
 function updateBoundaryEntriesSelect() {
+  boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
+  url = "https://geo-registers-prototype.herokuapp.com/mock-data/" + boundaryRegisterValue + "txt";
+  loadSelect('boundary-entries', url);
+}
+
+// What to do when registers-with-locations-select is changed
+function updateLocationEntriesSelect() {
+  boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
+  url = "https://geo-registers-prototype.herokuapp.com/mock-data/" + boundaryRegisterValue + "txt";
+  loadSelect('boundary-entries', url);
 }
 
 // DD
