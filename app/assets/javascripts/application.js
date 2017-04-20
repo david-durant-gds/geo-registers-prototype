@@ -104,16 +104,18 @@ function doRequest(request) {
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
   if (request == "get-boundary") {
     url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#boundary-entries-select").find(":selected").text();
-
-alert(url);
-
-
   }
 
   // Next we update the SQL command box
   commandUrl = url + "_command";
+  
+alert(commandUrl);  
+  
   var jqxhr = $.get(commandUrl)
   .done(function(data) {
+
+alert(data);
+  
     $("#command-box").text(data);
   });
 
