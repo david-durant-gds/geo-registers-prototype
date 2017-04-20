@@ -20,4 +20,111 @@ $(document).ready(function () {
   // to toggle hidden content
   var showHideContent = new GOVUK.ShowHideContent()
   showHideContent.init()
+   
+  // DD
+  // "length" is used to check for existance
+  if ($("#registers-with-boundaries-select").length) {
+    loadSelect('registers-with-boundaries-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-boundaries');
+    if ($("#boundary-entries-select").length) {
+      $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
+    }
+  }
+  
+  if ($("#registers-with-locations-select").length) {
+    loadSelect('registers-with-locations-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-locations');
+    if ($("#location-entries").length) {
+      $("#registers-with-locations-select").change(updateLocationEntriesSelect);
+    }
+  }
+    
 })
+
+// DD
+function loadSelect(element, fromLocation) {
+  var jqxhr = $.get(fromLocation, { element: element })
+  .done(function(data) {
+    var $el = $("#" + element);
+    $el.empty();
+    splitData = data.split("\n");
+    $.each(splitData, function(loopNumber, value) {
+      $el.append($("<option></option>").attr("value", value).text(value));
+    });
+
+    // Cascade update the boundary entries if that select exists (checks for empty to stop recursive loop)
+    if ( ($("#boundary-entries-select").length) && (!($("#boundary-entries-select").find(":selected").text()))) {
+      updateBoundaryEntriesSelect();
+    }
+    
+    // Cascade update the location entries if that select exists (checks for empty to stop recursive loop)
+    if ( ($("#location-entries-select").length) && (!($("#location-entries-select").find(":selected").text()))) {
+      updateLocationEntriesSelect();
+    }
+
+  });
+}
+
+// DD
+// What to do when registers-with-boundaries-select is changed
+function updateBoundaryEntriesSelect() {
+  boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue;
+  loadSelect('boundary-entries-select', url);
+}
+
+// DD
+// What to do when registers-with-locations-select is changed
+function updateLocationEntriesSelect() {
+  locationRegisterValue = $("#registers-with-locations-select").find(":selected").text()
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue;
+  loadSelect('location-entries-select', url);
+}
+
+// DD
+// Map init
+var map;
+var kmlLayer = null;
+function initMap() {
+  // Don't know why this is being called on pages without a map div but...
+  if (window.location.pathname.includes("map")) {
+    var greenwich = {lat: 51.4826, lng: 0.0077};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 6,
+      center: greenwich
+    });
+  }
+}
+
+// DD
+// Request SQL-mediated data
+function doRequest(request) {
+
+  // Okay, first we build the request
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
+  if (request == "get-boundary") {
+    url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#boundary-entries-select").find(":selected").text();
+  }
+
+  // Next we update the SQL command box
+  commandUrl = url + "_command";
+  var jqxhr = $.get(commandUrl)
+  .done(function(data) {
+    $("#command-box").val(data);
+  });
+
+  // Finally we get and then display the map data
+  if (kmlLayer != null) {
+    kmlLayer.setMap(null);
+  }
+  // Cache busting addition to URL
+  kmlUrl = url + ".kml?dummy=" + (new Date()).getTime();
+  
+alert(kmlUrl);
+
+  // This may keep adding new layers which we then hide which probably leaks memory like a sieve but this is only a hacky prototype...
+  kmlLayer = new google.maps.KmlLayer({
+    url: kmlUrl,
+    map: map,
+    zIndex: 1
+  });  
+
+}
