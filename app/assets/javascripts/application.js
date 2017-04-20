@@ -25,14 +25,14 @@ $(document).ready(function () {
   // DD
   // "length" is used to check for existance
   if ($("#registers-with-boundaries-select").length) {
-    loadSelect('registers-with-boundaries-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-boundaries.txt');
+    loadSelect('registers-with-boundaries-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-boundaries');
     if ($("#boundary-entries").length) {
       $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
     }
   }
   
   if ($("#registers-with-locations-select").length) {
-    loadSelect('registers-with-locations-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-locations.txt');
+    loadSelect('registers-with-locations-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-locations');
     if ($("#location-entries").length) {
       $("#registers-with-locations-select").change(updateLocationEntriesSelect);
     }
@@ -53,19 +53,12 @@ function loadSelect(element, fromLocation) {
 
     // Cascade update the boundary entries if that select exists (checks for empty to stop recursive loop)
     if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
-
-console.log("here");
-
-      boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-      url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + ".txt";
-      loadSelect('boundary-entries', url);
+      updateBoundaryEntriesSelect();
     }
     
     // Cascade update the location entries if that select exists (checks for empty to stop recursive loop)
     if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
-      locationRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-      url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue + ".txt";
-      loadSelect('location-entries', url);
+      updateLocationEntriesSelect();
     }
 
   });
@@ -75,19 +68,20 @@ console.log("here");
 // What to do when registers-with-boundaries-select is changed
 function updateBoundaryEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + ".txt";
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue;
   loadSelect('boundary-entries', url);
 }
 
+// DD
 // What to do when registers-with-locations-select is changed
 function updateLocationEntriesSelect() {
-  locationRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue + ".txt";
+  locationRegisterValue = $("#registers-with-locations-select").find(":selected").text()
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue;
   loadSelect('location-entries', url);
 }
 
 // DD
-// Map stuff
+// Map init
 var map;
 var kmlBoundaryLayer = null;
 var kmlLocationsLayer = null;
@@ -101,4 +95,29 @@ function initMap() {
       center: greenwich
     });
   }
+}
+
+// DD
+// Request SQL-mediated data
+function doRequest(request) {
+
+  // Okay, first we build the request
+  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
+  if (request == "get-boundary") {
+    url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#location-entries").find(":selected").text();
+
+console.log(url);
+
+
+  }
+
+  // Next we update the SQL command box
+  commandUrl = url + "_command";
+  var jqxhr = $.get(commandUrl, { element: element })
+  .done(function(data) {
+    $("#command-box").text(data);
+  });
+
+  // Finally we get and then display the map data
+
 }
