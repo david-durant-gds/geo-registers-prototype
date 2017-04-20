@@ -25,14 +25,14 @@ $(document).ready(function () {
   // DD
   // "length" is used to check for existance
   if ($("#registers-with-boundaries-select").length) {
-    loadSelect('registers-with-boundaries-select', 'registers-with-boundaries');
+    loadSelect('registers-with-boundaries-select', 'registers-with-boundaries.txt');
     if ($("#boundary-entries").length) {
       $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
     }
   }
   
   if ($("#registers-with-locations-select").length) {
-    loadSelect('registers-with-locations-select', 'registers-with-locations');
+    loadSelect('registers-with-locations-select', 'registers-with-locations.txt');
     if ($("#locations-entries").length) {
       $("#registers-with-locations-select").change(updateLocationEntriesSelect);
     }
