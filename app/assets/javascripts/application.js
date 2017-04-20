@@ -117,7 +117,7 @@ function doRequest(request) {
     kmlLayer.setMap(null);
   }
   // Cache busting addition to URL
-  kmlUrl = url + "?dummy=" + (new Date()).getTime();
+  kmlUrl = url + ".kml?dummy=" + (new Date()).getTime();
   
 alert(kmlUrl);
 
