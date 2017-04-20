@@ -83,8 +83,7 @@ function updateLocationEntriesSelect() {
 // DD
 // Map init
 var map;
-var kmlBoundaryLayer = null;
-var kmlLocationsLayer = null;
+var kmlLayer = null;
 function initMap() {
 
   // Don't know why this is being called on pages without a map div but...
@@ -114,5 +113,16 @@ function doRequest(request) {
   });
 
   // Finally we get and then display the map data
+  if (kmlLayer != null) {
+    kmlLayer.setMap(null);
+  }
+  // Cache busting addition to URL
+  kmlUrl = url + "?dummy=" + (new Date()).getTime();
+  // This may keep adding new layers which we then hide which probably leaks memory like a sieve but this is only a hacky prototype...
+  kmlLayer = new google.maps.KmlLayer({
+    url: kmlUrl,
+    map: map,
+    zIndex: 0
+  });  
 
 }
