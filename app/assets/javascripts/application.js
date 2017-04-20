@@ -26,7 +26,7 @@ $(document).ready(function () {
   var kmlBoundaryLayer = null;
   var kmlLocationsLayer = null;
   // If it's a page with a map we need to set it up
-  if (window.location.pathname.includes("map") {
+  if (window.location.pathname.includes("map")) {
     var greenwich = {lat: 51.4826, lng: 0.0077};
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 6,
