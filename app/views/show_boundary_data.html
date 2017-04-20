@@ -10,28 +10,43 @@
   <div class="grid-row">
     <div class="column-full-width">
 
-      <h1 class="heading-xlarge">Geographic registers</h1>
-      <h2 class="heading-medium">The idea</h2>
-
-      The purpose of this work was to investigate how registers that refer to locations can interact with those that refer to boundaries. A key component to this was using a geospatial database.
+      <h1 class="heading-xlarge">Boundary for a register entry</h1>
+      <a href="index.html">Go back to main page</a>
 
       <div class="grid-row">
         <div class="column-half">
 
-          <h2 class="heading-medium">Some slides to explain what we did</h2>
+          <div class="grid-row">        
+            <div class="column-half">
+              <label class="form-label" for="registers-with-boundaries-select">Registers with boundaries</label>
+              <select class="form-control" id="registers-with-boundaries-select">
+                <option>GOV.UK elements option 1</option>
+                <option>GOV.UK elements option 2</option>
+                <option>GOV.UK elements option 3</option>
+              </select>
+            </div>
 
-          <iframe src="https://docs.google.com/presentation/d/1wLUVcZpgR03JUdZnjDXs-Ph4oUX_oa3MiK3CGNzfCLY/embed?start=false&loop=false&delayms=5000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            <div class="column-half">
+              <label class="form-label" for="list-of-register-entries">Register entry</label>
+              <select class="form-control" id="list-of-register-entries">
+                <option>GOV.UK elements option 1</option>
+                <option>GOV.UK elements option 2</option>
+                <option>GOV.UK elements option 3</option>
+              </select>
+            </div>
+          </div>
         </div>
-        
+
         <div class="column-half">
-          <h2 class="heading-medium">Prototype pages</h2>
-
-          We put also created the following prototype pages.
-
-          <ul class="list list-bullet">
-            <li><a href="show_boundary_data.html">Show boundary for a register entry</a></li>
-          </ul>
+          <label class="form-label" for="command-box">Spatial-SQL command</label>
+          <input class="form-control" id="command-box" type="text">
         </div>
+
+      </div>
+
+      <p/>
+      Map here
+      <div id="map"></div>
         
     </div>
   </div>
