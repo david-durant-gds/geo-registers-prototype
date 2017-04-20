@@ -115,7 +115,7 @@ alert(url);
 
   // Next we update the SQL command box
   commandUrl = url + "_command";
-  var jqxhr = $.get(commandUrl, { element: element })
+  var jqxhr = $.get(commandUrl)
   .done(function(data) {
     $("#command-box").text(data);
   });
