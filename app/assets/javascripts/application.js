@@ -58,7 +58,7 @@ function loadSelect(element, fromLocation) {
 function updateBoundaryEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue + ".txt";
-assert(url);
+alert(url);
   loadSelect('boundary-entries', url);
 }
 
