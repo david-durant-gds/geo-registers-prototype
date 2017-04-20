@@ -26,7 +26,7 @@ $(document).ready(function () {
   // "length" is used to check for existance
   if ($("#registers-with-boundaries-select").length) {
     loadSelect('registers-with-boundaries-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-boundaries');
-    if ($("#boundary-entries").length) {
+    if ($("#boundary-entries-select").length) {
       $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
     }
   }
@@ -52,12 +52,12 @@ function loadSelect(element, fromLocation) {
     });
 
     // Cascade update the boundary entries if that select exists (checks for empty to stop recursive loop)
-    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
+    if ( ($("#boundary-entries-select").length) && (!($("#boundary-entries-select").find(":selected").text()))) {
       updateBoundaryEntriesSelect();
     }
     
     // Cascade update the location entries if that select exists (checks for empty to stop recursive loop)
-    if ( ($("#boundary-entries").length) && (!($("#boundary-entries").find(":selected").text()))) {
+    if ( ($("#location-entries").length) && (!($("#location-entries").find(":selected").text()))) {
       updateLocationEntriesSelect();
     }
 
@@ -69,7 +69,7 @@ function loadSelect(element, fromLocation) {
 function updateBoundaryEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue;
-  loadSelect('boundary-entries', url);
+  loadSelect('boundary-entries-select', url);
 }
 
 // DD
@@ -100,13 +100,10 @@ function initMap() {
 // DD
 // Request SQL-mediated data
 function doRequest(request) {
-
-alert("Here!");
-
   // Okay, first we build the request
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
   if (request == "get-boundary") {
-    url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#location-entries").find(":selected").text();
+    url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#boundary-entries-select").find(":selected").text();
 
 alert(url);
 
