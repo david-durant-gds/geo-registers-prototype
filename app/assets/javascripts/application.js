@@ -57,7 +57,7 @@ function loadSelect(element, fromLocation) {
     }
     
     // Cascade update the location entries if that select exists (checks for empty to stop recursive loop)
-    if ( ($("#location-entries").length) && (!($("#location-entries").find(":selected").text()))) {
+    if ( ($("#location-entries-select").length) && (!($("#location-entries-select").find(":selected").text()))) {
       updateLocationEntriesSelect();
     }
 
@@ -77,7 +77,7 @@ function updateBoundaryEntriesSelect() {
 function updateLocationEntriesSelect() {
   locationRegisterValue = $("#registers-with-locations-select").find(":selected").text()
   url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue;
-  loadSelect('location-entries', url);
+  loadSelect('location-entries-select', url);
 }
 
 // DD
@@ -85,7 +85,6 @@ function updateLocationEntriesSelect() {
 var map;
 var kmlLayer = null;
 function initMap() {
-
   // Don't know why this is being called on pages without a map div but...
   if (window.location.pathname.includes("map")) {
     var greenwich = {lat: 51.4826, lng: 0.0077};
