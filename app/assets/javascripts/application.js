@@ -20,24 +20,28 @@ $(document).ready(function () {
   // to toggle hidden content
   var showHideContent = new GOVUK.ShowHideContent()
   showHideContent.init()
-   
+
   // DD
   // "length" is used to check for existance
   if ($("#registers-with-boundaries-select").length) {
-    loadSelect('registers-with-boundaries-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-boundaries');
+    loadSelect('registers-with-boundaries-select', '/public/mock-data/registers-with-boundaries');
     if ($("#boundary-entries-select").length) {
       $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
     }
   }
   
+  // DD
+  // "length" is used to check for existance
   if ($("#registers-with-locations-select").length) {
-    loadSelect('registers-with-locations-select', 'https://geo-registers-prototype.herokuapp.com/public/mock-data/registers-with-locations');
+    loadSelect('registers-with-locations-select', '/public/mock-data/registers-with-locations');
     if ($("#location-entries").length) {
       $("#registers-with-locations-select").change(updateLocationEntriesSelect);
     }
   }
     
 })
+
+
 
 // DD
 function loadSelect(element, fromLocation) {
@@ -67,7 +71,7 @@ function loadSelect(element, fromLocation) {
 // What to do when registers-with-boundaries-select is changed
 function updateBoundaryEntriesSelect() {
   boundaryRegisterValue = $("#registers-with-boundaries-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + boundaryRegisterValue;
+  url = "/public/mock-data/" + boundaryRegisterValue;
   loadSelect('boundary-entries-select', url);
 }
 
@@ -75,7 +79,7 @@ function updateBoundaryEntriesSelect() {
 // What to do when registers-with-locations-select is changed
 function updateLocationEntriesSelect() {
   locationRegisterValue = $("#registers-with-locations-select").find(":selected").text()
-  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/" + locationRegisterValue;
+  url = "/public/mock-data/" + locationRegisterValue;
   loadSelect('location-entries-select', url);
 }
 
@@ -99,7 +103,7 @@ function initMap() {
 function doRequest(request) {
 
   // Okay, first we build the request
-  url = "https://geo-registers-prototype.herokuapp.com/public/mock-data/";
+  url = "/public/mock-data/";
   if (request == "get-boundary") {
     url = url + $("#registers-with-boundaries-select").find(":selected").text() + "_" + $("#boundary-entries-select").find(":selected").text();
   }
