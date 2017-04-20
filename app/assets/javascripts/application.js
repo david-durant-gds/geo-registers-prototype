@@ -26,7 +26,7 @@ $(document).ready(function () {
   // "length" is used to check for existance
   if ($("#registers-with-boundaries-select").length) {
     loadSelect('registers-with-boundaries-select', 'registers-with-boundaries.txt');
-    if ($("#boundary-entries").length)) {
+    if ($("#boundary-entries").length) {
       $("#registers-with-boundaries-select").change(updateBoundaryEntriesSelect);
     }
   }
