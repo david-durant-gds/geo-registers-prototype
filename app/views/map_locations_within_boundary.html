@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  GOV.UK prototype kit
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+  <div class="grid-row">
+    <div class="column-full-width">
+
+      <p/><p/>
+      <a href="index.html">Go back to main page</a>
+      <h1 class="heading-xlarge">Show boundary and all locations for a given type within an area entry</h1>
+
+      <div class="grid-row">
+        <div class="column-half">
+
+          <label class="form-label" for="registers-with-boundaries-select">Registers with boundaries</label>
+          <select class="form-control" id="registers-with-boundaries-select">
+          </select>
+
+          <p/><p/>
+          <label class="form-label" for="registers-with-locations-select">Registers with locations</label>
+          <select class="form-control" id="registers-with-locations-select">
+          </select>
+
+        </div>
+
+        <div class="column-half">
+          <label class="form-label" for="command-box">Spatial-SQL command</label>
+          <input class="form-control" id="command-box" type="text" rows="4">
+
+          <p/><p/>
+          <input class="button" type="submit" value="Load data" onclick="doRequest('locations-within-boundary')";>
+        </div>
+
+      </div>
+
+      <p/><p/>
+      <div id="map"></div>
+        
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>King's Heath Police Station</name>
+      <description>
+        <![CDATA[
+          <h3>The King's Heath Police Station</h3>
+          <p>Plenty of useful into here.</p>
+        ]]>
+      </description>
+      <Point>
+        <coordinates>-1.8931,52.4324</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
