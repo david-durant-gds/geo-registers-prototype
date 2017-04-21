@@ -189,9 +189,6 @@ function doRequest(request) {
   
   
 // FOR DEBUGGING - START
-//    url: 'http://localhost:3000/public/mock-data/local-authority_birmingham-metropolitan-district.kml?dummy=1492710501646361',
-//    url: 'https://geo-registers-prototype.herokuapp.com/public/mock-data/local-authority_birmingham-metropolitan-district.kml?dummy=1492710501646361',
-//    url: 'https://enigmatic-dusk-83533.herokuapp.com/data/local-authority_birmingham-metropolitan-district.kml?dummy=1492711151082', 
 //        google.maps.event.addListener(kmlLayer, 'status_changed', function () {
 //           console.log('KML load: ' + kmlLayer.getStatus());
 //           if (kmlLayer.getStatus() != 'OK') {
